@@ -2,7 +2,7 @@ const { Telegraf, Markup } = require('telegraf');
 const path = require('path');
 const download = require('./download');
 const speechToText = require('./speech-to-text');
-require('dotenv').config();
+// require('dotenv').config();
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
@@ -10,9 +10,9 @@ bot.start((ctx) => ctx.reply('Hola,\nBienvenido'));
 bot.command(['inicio', 'Inicio'], (ctx) => ctx.reply('Hola,\nBienvenido'));
 bot.command(['ayuda', 'Ayuda'], async (ctx) => {
   const response = await ctx.reply(
-    'Custom buttons keyboard',
+    'Botones de ayuda.',
     Markup.keyboard([
-      ['🔍 Prueba de velocidad', 'Revisión de tarea 📚'],
+      ['🔍 Prueba de velocidad lectora', 'Revisión de tarea 📚'],
       ['📢 Anuncios', '⭐️ Calificanos', 'Preguntas ❓'],
     ])
       .oneTime()
@@ -21,7 +21,7 @@ bot.command(['ayuda', 'Ayuda'], async (ctx) => {
   return response;
 });
 
-bot.hears('🔍 Prueba de velocidad', (ctx) =>
+bot.hears('🔍 Prueba de velocidad lectora', (ctx) =>
   ctx.reply(
     'Envia un audio de una lectura y obtendras las cantidad de palabras.'
   )
@@ -61,7 +61,7 @@ bot.on('voice', (ctx) => {
         .then((words) => {
           ctx.telegram.sendMessage(
             ctx.message.chat.id,
-            `Hemos detectado * ${words} * buen trabajo.`,
+            `Hemos detectado * ${words} * palabras buen trabajo.`,
             {
               parse_mode: 'Markdown',
             }

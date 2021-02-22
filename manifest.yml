@@ -1,0 +1,6 @@
+applications:
+  - name: telegramBackend
+    random-route: true
+    memory: 128M
+    command: node app.js
+    timeout: 600
